@@ -1,5 +1,5 @@
 terraform {
-  required_version = "= 1.4.5"
+  required_version = "= 1.6.4"
 
   required_providers {
     yandex = {
@@ -13,6 +13,6 @@ provider "yandex" {
   token = var.ya_token
   cloud_id  = var.ya_cloud_id
   folder_id = var.ya_folder_id
-  zone      = var.zone
+  zone      = var.ya_zone
 }
 
