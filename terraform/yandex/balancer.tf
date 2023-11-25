@@ -30,8 +30,8 @@ resource "yandex_lb_target_group" "web-servers" {
     address   = yandex_compute_instance.vm-test1.network_interface.0.ip_address
   }
 
-  target {
-    subnet_id = yandex_vpc_subnet.subnet_terraform.id
-    address   = yandex_compute_instance.vm-test2.network_interface.0.ip_address
-  }
+  # target {
+  #   subnet_id = yandex_vpc_subnet.subnet_terraform.id
+  #   address   = yandex_compute_instance.vm-test2.network_interface.0.ip_address
+  # }
 }
