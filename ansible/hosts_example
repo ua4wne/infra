@@ -1,0 +1,2 @@
+[docker_servers]
+vm_1 ansible_ssh_host=HOST_IP ansible_ssh_user=ubuntu
