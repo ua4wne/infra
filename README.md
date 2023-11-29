@@ -1,2 +1,3 @@
-# infra
-skillbox diploma
+# Порядок работы
+1. Перейти в папку terraform/yandex и последовательно запустить команды terraform plan и terraform apply для создания всей облачной инфраструктуры
+2. Перейти в папку ansible и запустить плейбук install_docker.yml, который развернет все необходимое для запуска контейнеров Docker
