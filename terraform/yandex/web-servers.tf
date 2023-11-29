@@ -27,6 +27,11 @@ resource "yandex_compute_instance" "vm-test1" {
     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 
+  # прерываемая ВМ
+  scheduling_policy {
+    preemptible = true
+  }
+
   platform_id = "standard-v1" # тип процессора (Intel Broadwell)
 
 }
