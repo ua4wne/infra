@@ -1,0 +1,19 @@
+---
+- name: Install required packages
+  apt:
+    pkg:
+      - adduser
+      - libfontconfig1
+      - musl
+    state: latest
+    update_cache: true
+
+- name: Download grafana
+  get_url: 
+    url="{{ deb_packet_url }}"
+    dest="/tmp/{{ package_name }}.deb"
+
+- name: Install grafana
+  apt: deb="/tmp/{{ package_name }}.deb"
+  notify:
+    - grafana systemd

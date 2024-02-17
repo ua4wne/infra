@@ -1,0 +1,13 @@
+[docker_servers]
+vm_1 ansible_ssh_host=HOST_IP ansible_ssh_user=ubuntu
+
+[prometheus]
+srv1 ansible_ssh_host=HOST_IP ansible_ssh_user=ubuntu
+
+[grafana]
+testsrv ansible_ssh_host=HOST_IP ansible_ssh_user=ubuntu
+
+[monitoring:children]
+docker_servers
+prometheus
+grafana
