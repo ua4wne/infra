@@ -19,8 +19,8 @@ resource "yandex_compute_instance" "vm" {
   allow_stopping_for_update = var.allow_stopping
 
   resources {
-    core_fraction = var.env == "prod" ? 5 : 5 # Гарантированная доля vCPU
-    cores         = var.env == "prod" ? 2 : 2  # vCPU
+    core_fraction = var.env == "prod" ? 10 : 5 # Гарантированная доля vCPU
+    cores         = var.env == "prod" ? 4 : 2  # vCPU
     memory        = var.env == "prod" ? 2 : 1
   }
 
