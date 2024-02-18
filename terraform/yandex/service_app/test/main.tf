@@ -20,12 +20,13 @@ provider "yandex" {
   zone      = var.ya_zone
 }
 
+# создаем сеть
 module "network" {
   source = "../../modules/ya_network"
   env    = var.env
 }
 
-# создаем хосты для балансировщика
+# создаем хосты
 module "vm" {
   source         = "../../modules/ya_server"
   network_id     = module.network.network_id
@@ -36,6 +37,7 @@ module "vm" {
   depends_on     = [module.network]
 }
 
+# создаем балансировщик
 module "balancer" {
   source     = "../../modules/ya_balancer"
   subnet_id  = module.network.network_id
@@ -44,6 +46,7 @@ module "balancer" {
   depends_on = [module.vm]
 }
 
+# создаем записи DNS
 module "dns_zone" {
   source       = "../../modules/ya_zone"
   public_ip_lb = module.balancer.lb_public_ip
