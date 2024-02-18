@@ -2,7 +2,7 @@
 - hosts: monitoring
   remote_user: ubuntu
   become: true
-  
+
   tasks:
     - name: Install required packages
       apt:
@@ -17,7 +17,7 @@
       systemd:
         name: chrony
         state: started
-        enabled: yes   
+        enabled: yes
 
 - hosts: prometheus
   remote_user: ubuntu
@@ -25,7 +25,7 @@
   vars:
     target_domain: deviot.ru
     target_port: 80
-    exporter_ip: 192.168.15.28
+    exporter_ip: 192.168.15.34
   roles:
     - role: prometheus
 
@@ -35,7 +35,7 @@
   roles:
     - role: grafana
 
-- hosts: [prometheus,docker_servers]
+- hosts: [prometheus, docker_servers]
   remote_user: ubuntu
   become: true
   roles:
