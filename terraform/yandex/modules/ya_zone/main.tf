@@ -17,7 +17,7 @@ resource "yandex_dns_zone" "zone_dns" {
 
 resource "yandex_dns_recordset" "rs1" {
   zone_id = yandex_dns_zone.zone_dns.id
-  name    = "${var.zone}."
+  name    = var.env == "prod" ? "${var.zone}." : "${var.env}.${var.zone}."
   type    = "A"
   ttl     = 200
   data    = var.public_ip_lb
@@ -26,7 +26,7 @@ resource "yandex_dns_recordset" "rs1" {
 resource "yandex_dns_recordset" "dns_recs" {
   count   = length(var.dns_name)
   zone_id = yandex_dns_zone.zone_dns.id
-  name    = "${var.dns_name[count.index]}."
+  name    = var.env == "prod" ? "${var.dns_name[count.index]}." : "${var.env}.${var.dns_name[count.index]}."
   type    = "A"
   ttl     = 200
   data    = [var.public_ip[count.index]]
