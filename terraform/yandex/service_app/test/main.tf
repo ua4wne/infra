@@ -46,7 +46,7 @@ module "dns_zone" {
   source       = "../../modules/ya_zone"
   public_ip_lb = module.balancer.lb_public_ip
   dns_name     = ["monitoring.deviot.ru", "grafana.deviot.ru"]
-  public_ip    = flatten(module.vm.public_ip)
+  public_ip    = [module.vm.public_ip[0],module.vm.public_ip[1]]
 
   depends_on = [module.balancer]
 }
