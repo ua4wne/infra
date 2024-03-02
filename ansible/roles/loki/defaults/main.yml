@@ -1,0 +1,4 @@
+---
+# defaults file for loki
+loki_version: "v2.9.4"
+loki_host: "grafana.deviot.ru"

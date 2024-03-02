@@ -1,16 +1,12 @@
 terraform {
-  required_version = "= 1.7.3"
+  required_version = "= 1.7.4"
 
   required_providers {
     yandex = {
-      source = "registry.terraform.io/yandex-cloud/yandex"
+      source = "yandex-cloud/yandex"
       #      version = ">= 0.73"
     }
   }
-}
-
-data "yandex_compute_image" "last_ubuntu" {
-  family = "ubuntu-2204-lts" # ОС (Ubuntu, 22.04 LTS)
 }
 
 provider "yandex" {

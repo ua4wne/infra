@@ -25,7 +25,7 @@
   vars:
     target_domain: deviot.ru
     target_port: 80
-    exporter_ip: 192.168.15.34
+    exporter_ip: 192.168.15.4
   roles:
     - role: prometheus
 

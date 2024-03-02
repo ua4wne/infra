@@ -1,3 +1,4 @@
 hosts
 ansible.cfg
 *.txt
+agent_id.yml

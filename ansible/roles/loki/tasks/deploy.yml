@@ -1,0 +1,40 @@
+---
+# deploy file for loki
+- name: Download and unzip loki
+  ansible.builtin.unarchive:
+    src: "https://github.com/grafana/loki/releases/download/{{ loki_version }}/loki-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}.zip"
+    dest: /var/tmp/
+    remote_src: yes
+
+- name: Copy files to the install locations
+  copy:
+    src: "/var/tmp/loki-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}"
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: a+x
+
+- name: Copy loki config file
+  template:
+    src: templates/loki-local-config.yaml
+    dest: /usr/local/bin/loki-local-config.yaml
+
+- name: Cleaning up the home directory source
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+  - "loki-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}.zip"
+  - "loki-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}"
+
+- name: Copy systemd init file
+  template:
+    src: templates/loki.service.j2
+    dest:  /etc/systemd/system/loki.service
+    notify:
+    - systemd reload
+
+- name: Restart and enable the loki service
+  service:
+    name: loki
+    state: restarted
+    enabled: yes

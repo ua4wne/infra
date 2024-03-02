@@ -1,0 +1,9 @@
+---
+# tasks file for loki
+- name: Deploy loki service
+  ansible.builtin.include_tasks: deploy.yml
+  when: state|default('present') == 'present'
+
+# - name: Uninstall loki service
+#   ansible.builtin.include_tasks: uninstall.yml
+#   when: state|default('present') == 'absent'
