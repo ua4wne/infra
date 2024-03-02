@@ -1,5 +1,12 @@
 ---
 # deploy file for loki
+- name: Install unzip for unpacking archives 
+  apt:
+    pkg:
+      - unzip
+    state: latest
+    update_cache: true
+
 - name: Download and unzip loki
   ansible.builtin.unarchive:
     src: "https://github.com/grafana/loki/releases/download/{{ loki_version }}/loki-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}.zip"
@@ -30,7 +37,7 @@
   template:
     src: templates/loki.service.j2
     dest:  /etc/systemd/system/loki.service
-    notify:
+  notify:
     - systemd reload
 
 - name: Restart and enable the loki service

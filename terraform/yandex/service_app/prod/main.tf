@@ -1,3 +1,21 @@
+terraform {
+  required_version = "= 1.7.4"
+
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+      #      version = ">= 0.73"
+    }
+  }
+}
+
+provider "yandex" {
+  token     = var.ya_token
+  cloud_id  = var.ya_cloud_id
+  folder_id = var.ya_folder_id
+  zone      = var.ya_zone
+}
+
 data "yandex_compute_image" "last_ubuntu" {
   family = "ubuntu-2204-lts" # ОС (Ubuntu, 22.04 LTS)
 }

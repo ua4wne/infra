@@ -19,24 +19,14 @@
         state: started
         enabled: yes
 
-- hosts: prometheus
-  remote_user: ubuntu
-  become: true
-  vars:
-    target_domain: test.deviot.ru
-    target_port: 80
-    exporter_ip: 192.168.15.8
-  roles:
-    - role: prometheus
-
 - hosts: grafana
   remote_user: ubuntu
   become: true
   roles:
-    - role: grafana
+    - role: loki
 
-- hosts: [prometheus, docker_servers]
+- hosts: docker_servers
   remote_user: ubuntu
   become: true
   roles:
-    - role: node_exporter
+    - role: promtail
