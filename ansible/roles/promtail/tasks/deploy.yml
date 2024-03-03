@@ -1,10 +1,4 @@
 ---
-# - name: Create User promtail
-#   user:
-#     name: promtail
-#     create_home: no
-#     shell: /bin/false
-
 - name: Install unzip for unpacking archives 
   apt:
     pkg:
@@ -14,25 +8,18 @@
 
 - name: Download and unzip promtail
   ansible.builtin.unarchive:
-    src: "https://github.com/grafana/loki/releases/download/{{ promtail_version }}/promtail-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}.zip"
-    dest: /var/tmp/
+    src: "https://github.com/grafana/loki/releases/download/v{{ promtail_version }}/promtail-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}.zip"
+    dest: /tmp
     remote_src: yes
 
 - name: Copy files to the install locations
   copy:
-    src: "/var/tmp/promtail-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}"
-    dest: /usr/local/bin
+    src: "/tmp/promtail-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}"
+    dest: /usr/local/bin/
     remote_src: yes
-    mode: a+x
-
-# Allow the promtail user to read the /var/log directory
-# - name: Change Log file permissions
-#   command:
-#     cmd:  "chown -R ubuntu:ubuntu {{ item }}"
-#   loop:
-#   - "/var/log"
-#   - "/var/lib/docker/containers"
-#   - "/tmp"
+    mode: preserve
+    owner: "{{ promtail_user }}"
+    group: "{{ promtail_group }}"
 
 - name: Copy promtail config file
   template:

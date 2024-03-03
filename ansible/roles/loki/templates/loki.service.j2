@@ -3,8 +3,8 @@ Description=Loki service
 After=network.target
 
 [Service]
-User=ubuntu
-Group=ubuntu
+User={{ loki_user }}
+Group={{ loki_group }}
 Type=simple
 ExecStart=/usr/local/bin/loki-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}} -config.file /usr/local/bin/loki-local-config.yaml
 

@@ -9,13 +9,13 @@ clients:
   - url: http://{{ loki_host }}:3100/loki/api/v1/push
 
 scrape_configs:
-# system logs
-- job_name: system
-  static_configs:
-  - labels:
-      job: varlogs
-      host: {{ inventory_hostname }}
-      __path__: /var/log/*log
+## system logs
+#- job_name: system
+#  static_configs:
+#  - labels:
+#      job: varlogs
+#      host: {{ inventory_hostname }}
+#      __path__: /var/log/*log
   
 - job_name: containers
   static_configs:
@@ -36,14 +36,17 @@ scrape_configs:
         tag:
       source: attrs
   - regex:
-      expression: (?P<container_name>(?:[^|]*[^|]))
+      expression: (?P<image_name>(?:[^|]*[^|])).(?P<container_name>(?:[^|]*[^|])).(?P<image_id>(?:[^|]*[^|])).(?P<container_id>(?:[^|]*[^|]))
       source: tag
   - timestamp:
       format: RFC3339Nano
       source: time
   - labels:
-      # tag:
+      tag:
       stream:
+      image_name:
       container_name:
+      image_id:
+      container_id:
   - output:
       source: output

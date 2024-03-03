@@ -9,7 +9,7 @@
 
 - name: Download and unzip loki
   ansible.builtin.unarchive:
-    src: "https://github.com/grafana/loki/releases/download/{{ loki_version }}/loki-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}.zip"
+    src: "https://github.com/grafana/loki/releases/download/v{{ loki_version }}/loki-linux-{{'arm64' if ansible_architecture == 'aarch64' else 'amd64'}}.zip"
     dest: /var/tmp/
     remote_src: yes
 

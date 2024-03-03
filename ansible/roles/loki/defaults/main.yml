@@ -1,4 +1,6 @@
 ---
 # defaults file for loki
-loki_version: "v2.9.4"
+loki_version: "2.9.4"
 loki_host: "grafana.deviot.ru"
+loki_user: "ubuntu"
+loki_group: "ubuntu"

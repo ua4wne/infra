@@ -23,9 +23,9 @@
   remote_user: ubuntu
   become: true
   vars:
-    target_domain: test.deviot.ru
+    target_domain: deviot.ru
     target_port: 80
-    exporter_ip: 192.168.15.8
+    exporter_ip: 192.168.15.30
   roles:
     - role: prometheus
 

@@ -1,4 +1,6 @@
 ---
 # defaults file for promtail
-promtail_version: "v2.9.4"
-loki_host: "192.168.15.10"
+promtail_version: "2.9.4"
+promtail_user: "root"
+promtail_group: "root"
+loki_host: "192.168.15.18"
